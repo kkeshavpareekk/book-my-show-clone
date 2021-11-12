@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { MovieContext } from "../../context/movie.context";
 
 //components
 import MovieInfo from "./Movieinfo.component";
 
 const MovieHero = () => {
+    const { movie } = useContext(MovieContext);
     return (
         <>
         <div>
@@ -15,7 +18,7 @@ const MovieHero = () => {
                 </div>
 
                 <div className="w-full h-56 bg-opacity-50 absolute bg-black z-10 bottom-0" />
-                <img src="https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/venom-let-there-be-carnage-et00122532-29-09-2021-06-14-07.jpg" alt="poster" className="w-full h-full"/>
+                <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="poster" className="w-full h-full"/>
             </div>
 
             {/* medium screen */}
@@ -24,7 +27,7 @@ const MovieHero = () => {
                     <MovieInfo />
                 </div>
                 <div className="w-full h-56 bg-opacity-50 absolute bg-black z-10 bottom-0" />
-                <img src="https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/venom-let-there-be-carnage-et00122532-29-09-2021-06-14-07.jpg" alt="poster" className="w-full h-full"/>
+                <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="poster" className="w-full h-full"/>
             </div>
 
             {/* large screen */}
@@ -34,14 +37,14 @@ const MovieHero = () => {
 
                 <div className="absolute z-30 left-24 top-10 flex items-center gap-10">
                     <div className="w-64 h-96">
-                        <img src="https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/venom-let-there-be-carnage-et00122532-29-09-2021-06-14-07.jpg" alt="poster" className="w-full h-full rounded-xl" />
+                        <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="poster" className="w-full h-full rounded-xl" />
                     </div>
                     <div>
                         <MovieInfo />
                     </div>
                 </div>
 
-                <img src="https://in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/venom-let-there-be-carnage-et00122532-29-09-2021-06-14-07.jpg" alt="poster" className="w-full h-full" />
+                <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt="poster" className="w-full h-full" />
             </div>
         </div>
         </>

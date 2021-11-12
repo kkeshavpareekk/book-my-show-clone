@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeroSlider from "react-slick";
+
+//axios
+import axios from "axios";
 
 //components
 import { NextArrow, PrevArrow } from "./Arrows.component";
@@ -10,6 +13,19 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 const HeroCarousel = () => {
+
+    const [Images, setImages] = useState([]);
+
+    useEffect(() => {
+        const requestNowPlayingMovies = async () => {
+            const getImages = await axios.get("/movie/now_playing");
+            setImages(getImages.data.results);
+        };
+
+        requestNowPlayingMovies();
+
+    }, []);
+
     const settingsLG = {
         arrows: true,
         autoplay: true,
@@ -33,24 +49,22 @@ const HeroCarousel = () => {
         prevArrow: <PrevArrow />,
     };
 
-    const images = ["https://images.unsplash.com/photo-1634662404902-e559656e1993?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60","https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1633113088983-12fb3b2fe0ac?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxNnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1593642702749-b7d2a804fbcf?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwyNnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1626846116799-ad61f874f99d?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"];
-
     return (
         <>
         <div className="lg:hidden">
             <HeroSlider {...settings}>
-                {images.map ((image) => (
+                {Images.map ((image) => (
                     <div className="w-full h-56 md:h-80 py-3">
-                        <img src={image} alt="testing" className="w-full h-full"/>
+                        <img src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`} alt="testing" className="w-full h-full"/>
                     </div>
                 ))}
             </HeroSlider>
         </div>
         <div className="hidden lg:block"> 
             <HeroSlider {...settingsLG}>
-                {images.map ((image) => (
+                {Images.map ((image) => (
                     <div className="w-full h-96 px-2 py-3">
-                        <img src={image} alt="testing" className="w-full h-full rounded-md"/>
+                        <img src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`} alt="testing" className="w-full h-full rounded-md"/>
                     </div>
                 ))}
             </HeroSlider>
