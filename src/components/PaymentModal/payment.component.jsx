@@ -1,30 +1,10 @@
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 
-export default function MyModal({isOpen, setIsOpen, price}) {
+export default function MyModal({ isOpen, setIsOpen, price }) {
   function closeModal() {
     setIsOpen(false);
   }
- 
-  const launchRazorPay = () => {
-    let options = {
-      key: "rzp_test_NDVQ6CWVj01aCq",
-      amount: price * 100,
-      currency: "INR",
-      name: "Book My Show Clone",
-      description: "Movie Purchase or Rental",
-      image:
-        "https://i.ibb.co/zPBYW3H/imgbin-bookmyshow-office-android-ticket-png.png",
-      handler: () => {
-        setIsOpen(false);
-        alert("Payment Done");
-      },
-      theme: { color: "#c4242d" },
-    };
-
-    let razorPay = new window.Razorpay(options);
-    razorPay.open();
-    };
 
   return (
     <>
@@ -80,9 +60,8 @@ export default function MyModal({isOpen, setIsOpen, price}) {
                   <button
                     type="button"
                     className=" w-full inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-                    onClick={launchRazorPay}
                   >
-                    Pay  ₹{price}
+                    Pay ₹{price}
                   </button>
                   <button
                     type="button"
@@ -99,4 +78,4 @@ export default function MyModal({isOpen, setIsOpen, price}) {
       </Transition>
     </>
   );
-};
+}
